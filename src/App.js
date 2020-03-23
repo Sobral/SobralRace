@@ -1,14 +1,19 @@
 import React from 'react';
-
-import Routes from './routes';
-import GlobalStyle from './styles/global';
+import { Container } from './style';
 
 function App() {
   return (
-    <>
-      <Routes />
-      <GlobalStyle />
-    </>
+    <Container>
+      <form>
+        <input
+          type="text"
+          id="playerName"
+          placeholder="Nome"
+          autoComplete="off"
+        />
+        <button type="submit">Iniciar Corrida</button>
+      </form>
+    </Container>
   );
 }
 
