@@ -1,17 +1,13 @@
 import React from 'react';
+import Player from '../player';
+
+import { Container } from './style';
 
 function World() {
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '800px',
-        height: '800px',
-        border: '1px solid white',
-        margin: '10px auto',
-        backgroundColor: 'black',
-      }}
-    />
+    <Container>
+      <Player />
+    </Container>
   );
 }
 
