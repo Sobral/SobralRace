@@ -1,8 +1,9 @@
 import store from '../../services/store';
 import { MOVE } from '../../services/constants';
+import { subscribe } from '../../services/keyboard';
 
 export default function handleMovement(player) {
-  function handleKeyDown(e) {
+  function handleKeyDown(data) {
     const oldPosition = store.getState().player.position;
 
     function checkBoundary(position) {
@@ -32,7 +33,8 @@ export default function handleMovement(player) {
       ArrowLeft: MoveLeft,
     };
 
-    const moveFunction = mapKeyMovement[e.key];
+    const { keyPressed } = data;
+    const moveFunction = mapKeyMovement[keyPressed];
 
     if (moveFunction) {
       store.dispatch({
@@ -44,9 +46,7 @@ export default function handleMovement(player) {
     }
   }
 
-  window.addEventListener('keydown', e => {
-    handleKeyDown(e);
-  });
+  subscribe(handleKeyDown);
 
   return player;
 }
