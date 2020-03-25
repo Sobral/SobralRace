@@ -17,13 +17,22 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const NotFoundRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+    )}
+  />
+);
+
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Main} />
         <PrivateRoute path="/game" exact component={Game} />
-        <Route path="*" component={Main} />
+        <NotFoundRoute path="*" component={Main} />
       </Switch>
     </BrowserRouter>
   );
