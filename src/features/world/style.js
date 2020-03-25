@@ -6,5 +6,6 @@ export const Container = styled.div`
   height: 800px;
   border: 1px solid white;
   margin: 10px auto;
-  background-color: black;
+  background-image: url('assets/road/cenario.gif');
+  background-size: cover;
 `;
