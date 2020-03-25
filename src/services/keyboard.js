@@ -12,7 +12,6 @@ const KeyboardListener = () => {
   }
 
   window.addEventListener('keydown', event => {
-    event.preventDefault();
     const data = {
       keyPressed: event.key,
     };
