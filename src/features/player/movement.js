@@ -1,18 +1,46 @@
+import store from '../../services/store';
+import { MOVE } from '../../services/constants';
+
 export default function handleMovement(player) {
   function handleKeyDown(e) {
+    const oldPosition = store.getState().player.position;
+
+    function checkBoundary(position) {
+      if (position >= 0 && position <= 2 * MOVE) {
+        return position;
+      }
+      return oldPosition;
+    }
+    function MoveRight() {
+      return oldPosition + MOVE;
+    }
+
+    function MoveLeft() {
+      return oldPosition - MOVE;
+    }
+
+    function MoveMid() {
+      return MOVE;
+    }
+
     const mapKeyMovement = {
-      a: () => console.log('A clicado'),
-      s: () => console.log('S clicado'),
-      d: () => console.log('D clicado'),
-      ArrowDown: () => console.log('BAIXO clicado'),
-      ArrowRight: () => console.log('DIREITA clicado'),
-      ArrowLeft: () => console.log('ESQUERDA clicado'),
+      a: MoveLeft,
+      s: MoveMid,
+      d: MoveRight,
+      ArrowDown: MoveMid,
+      ArrowRight: MoveRight,
+      ArrowLeft: MoveLeft,
     };
 
     const moveFunction = mapKeyMovement[e.key];
 
     if (moveFunction) {
-      moveFunction();
+      store.dispatch({
+        type: 'MOVE_PLAYER',
+        payload: {
+          position: checkBoundary(moveFunction()),
+        },
+      });
     }
   }
 
